@@ -1,4 +1,4 @@
-use ethers::{core::types::H256, prelude::U256};
+use primitive_types::{H256, U256};
 
 use crate::{
     error::IngestionError, utils::hash_concat, Merkle, MerkleProof, Proof, TREE_DEPTH, ZERO_HASHES,

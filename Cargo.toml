@@ -17,10 +17,8 @@ crate-type = ["cdylib", "rlib"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-ethers = { git = "https://github.com/gakonst/ethers-rs", branch = "master", default-features = false }
+primitive-types = { version = "0.11.1", default-features = false, features = ["byteorder", "rustc-hex"] }
 sha3 = "0.9.1"
-thiserror = "1.0.30"
-serde = {version = "1.0", features = ["derive"]}
 affix = "0.1.2"
 once_cell = "1.8.0"
 thiserror-no-std = "2.0.2"

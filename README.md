@@ -29,8 +29,8 @@ For convenient use in our own crates, we have aliased the depth 32 trees as
 `NomadTree` and `NomadLightMerkle`.
 
 ```rust
-use accumulator::{Tree, Proof, Merkle, MerkleProof};
-use ethers::prelude::H256;
+use no_std_merkle::{Tree, Proof, Merkle, MerkleProof};
+use primitive_types::H256;
 
 let mut tree: Tree<16> = Default::default();
 tree.ingest(H256::zero());

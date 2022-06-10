@@ -1,5 +1,5 @@
 use alloc::{boxed::Box, vec::Vec};
-use ethers::core::types::H256;
+use primitive_types::H256;
 use once_cell::sync::Lazy;
 
 use crate::{error::IngestionError, hash_concat, EMPTY_SLICE, TREE_DEPTH, ZERO_HASHES};
@@ -378,7 +378,7 @@ mod tests {
 
     #[test]
     fn big_test() {
-        let leaves: Vec<_> = (0..64).map(H256::from_low_u64_be).collect();
+        let leaves: Vec<_> = (0 as u64 .. 64).map(H256::from_low_u64_be).collect();
 
         let mut tree = MerkleTree::create(&[], 32);
         leaves.iter().for_each(|leaf| {

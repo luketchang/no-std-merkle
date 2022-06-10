@@ -1,6 +1,6 @@
 use sha3::{Digest, Keccak256};
 
-use ethers::core::types::{H256, U256};
+use primitive_types::{H256, U256};
 
 /// Return the keccak256 digest of the preimage
 pub fn hash(preimage: impl AsRef<[u8]>) -> H256 {

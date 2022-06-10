@@ -35,7 +35,7 @@ pub mod wasm;
 #[cfg_attr(target_arch = "wasm32", global_allocator)]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-use ethers::{core::types::H256, prelude::U256};
+use primitive_types::{U256, H256};
 use once_cell::sync::Lazy;
 
 /// Tree depth

@@ -1,6 +1,6 @@
 use crate::{full::MerkleTree, IngestionError, LightMerkle, Merkle, Proof, ProvingError};
 use alloc::boxed::Box;
-use ethers::{core::types::H256, prelude::U256};
+use primitive_types::{H256, U256};
 
 /// A simplified interface for a full sparse merkle tree
 #[derive(Debug, PartialEq)]

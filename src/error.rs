@@ -1,4 +1,4 @@
-use ethers::prelude::H256;
+use primitive_types::H256;
 use thiserror;
 
 /// Tree Errors
