@@ -27,13 +27,13 @@ pub mod proof;
 /// A full incremental merkle tree. Suitable for proving.
 pub mod tree;
 
-#[cfg(target_arch = "wasm32")]
-/// Wasm bindings for common operations
-pub mod wasm;
+// #[cfg(target_arch = "wasm32")]
+// /// Wasm bindings for common operations
+// pub mod wasm;
 
-#[cfg(target_arch = "wasm32")]
-#[cfg_attr(target_arch = "wasm32", global_allocator)]
-static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
+// #[cfg(target_arch = "wasm32")]
+// #[cfg_attr(target_arch = "wasm32", global_allocator)]
+// static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 use primitive_types::{U256, H256};
 use once_cell::sync::Lazy;
