@@ -19,15 +19,8 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 primitive-types = { version = "0.11.1", default-features = false, features = ["byteorder", "rustc-hex"] }
 sha3 = "0.9.1"
-affix = "0.1.2"
 once_cell = "1.8.0"
 thiserror-no-std = "2.0.2"
-
-[target.'cfg(target_arch = "wasm32")'.dependencies]
-wee_alloc = "0.4.5"
-js-sys = "0.3.56"
-wasm-bindgen = { version = "0.2.79", features = ["serde-serialize"] }
-affix = "0.1.2"
 
 [features]
 default = ["std"]
