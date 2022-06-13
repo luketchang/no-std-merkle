@@ -1,21 +1,20 @@
-use sha3::{Digest, Keccak256};
-
 use primitive_types::{H256, U256};
+use tiny_keccak::{Hasher, Keccak};
 
 /// Return the keccak256 digest of the preimage
 pub fn hash(preimage: impl AsRef<[u8]>) -> H256 {
-    H256::from_slice(Keccak256::digest(preimage.as_ref()).as_slice())
+    let mut output = [0u8; 32];
+    let mut hasher = Keccak::v256();
+    hasher.update(preimage.as_ref());
+    hasher.finalize(&mut output);
+    output.into()
 }
 
 /// Return the keccak256 disgest of the concatenation of the arguments
 pub fn hash_concat(left: impl AsRef<[u8]>, right: impl AsRef<[u8]>) -> H256 {
-    H256::from_slice(
-        Keccak256::new()
-            .chain(left.as_ref())
-            .chain(right.as_ref())
-            .finalize()
-            .as_slice(),
-    )
+    let mut vec = left.as_ref().to_vec();
+    vec.extend_from_slice(right.as_ref());
+    hash(vec)
 }
 
 /// Max number of leaves in a tree

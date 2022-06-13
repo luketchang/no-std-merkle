@@ -18,7 +18,7 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 primitive-types = { version = "0.11.1", default-features = false}
-sha3 = "0.9.1"
+tiny-keccak = { version = "2.0.2", default-features = false, features = ["keccak"] }
 lazy_static = "1.4.0"
 thiserror-no-std = "2.0.2"
 
