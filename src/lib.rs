@@ -35,8 +35,7 @@ pub mod tree;
 // #[cfg_attr(target_arch = "wasm32", global_allocator)]
 // static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
-use primitive_types::{U256, H256};
-use once_cell::sync::Lazy;
+use primitive_types::{H256, U256};
 
 /// Tree depth
 pub const TREE_DEPTH: usize = 32;
@@ -57,14 +56,16 @@ pub use tree::*;
 
 pub use utils::*;
 
-/// A cache of the zero hashes for each layer of the tree.
-pub static ZERO_HASHES: Lazy<[H256; TREE_DEPTH + 1]> = Lazy::new(|| {
-    let mut hashes = [H256::zero(); TREE_DEPTH + 1];
-    for i in 0..TREE_DEPTH {
-        hashes[i + 1] = hash_concat(hashes[i], hashes[i]);
-    }
-    hashes
-});
+lazy_static::lazy_static! {
+    /// A cache of the zero hashes for each layer of the tree.
+    pub static ref ZERO_HASHES: [H256; TREE_DEPTH + 1] = {
+        let mut hashes = [H256::zero(); TREE_DEPTH + 1];
+        for i in 0..TREE_DEPTH {
+            hashes[i + 1] = hash_concat(hashes[i], hashes[i]);
+        }
+        hashes
+    };
+}
 
 /// A merkle proof
 pub trait MerkleProof {

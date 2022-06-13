@@ -1,6 +1,5 @@
 use alloc::{boxed::Box, vec::Vec};
 use primitive_types::H256;
-use once_cell::sync::Lazy;
 
 use crate::{error::IngestionError, hash_concat, EMPTY_SLICE, TREE_DEPTH, ZERO_HASHES};
 
@@ -13,9 +12,12 @@ use crate::{error::IngestionError, hash_concat, EMPTY_SLICE, TREE_DEPTH, ZERO_HA
 //    - remove ring dependency
 // In accordance with its license terms, the apache2 license is reproduced below
 
-/// Zero nodes to act as "synthetic" left and right subtrees of other zero nodes.
-pub static ZERO_NODES: Lazy<Vec<MerkleTree>> =
-    Lazy::new(|| (0..=TREE_DEPTH).map(MerkleTree::Zero).collect());
+lazy_static::lazy_static! {
+    /// Zero nodes to act as "synthetic" left and right subtrees of other zero nodes.
+    pub static ref ZERO_NODES: Vec<MerkleTree> = {
+        (0..=TREE_DEPTH).map(MerkleTree::Zero).collect()
+    };
+}
 
 /// Right-sparse Merkle tree.
 ///
@@ -378,7 +380,7 @@ mod tests {
 
     #[test]
     fn big_test() {
-        let leaves: Vec<_> = (0 as u64 .. 64).map(H256::from_low_u64_be).collect();
+        let leaves: Vec<_> = (0 as u64..64).map(H256::from_low_u64_be).collect();
 
         let mut tree = MerkleTree::create(&[], 32);
         leaves.iter().for_each(|leaf| {
