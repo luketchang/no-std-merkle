@@ -21,3 +21,21 @@ pub fn hash_concat(left: impl AsRef<[u8]>, right: impl AsRef<[u8]>) -> H256 {
 pub(crate) fn max_leaves(n: usize) -> U256 {
     U256::from(2).pow(n.into()) - 1
 }
+
+/// Compute a root hash from a leaf and a Merkle proof.
+pub fn merkle_root_from_branch(leaf: H256, branch: &[H256], depth: usize, index: usize) -> H256 {
+    assert_eq!(branch.len(), depth, "proof length should equal depth");
+
+    let mut current = leaf;
+
+    for (i, next) in branch.iter().enumerate().take(depth) {
+        let ith_bit = (index >> i) & 0x01;
+        if ith_bit == 1 {
+            current = hash_concat(next, current);
+        } else {
+            current = hash_concat(current, next);
+        }
+    }
+
+    current
+}

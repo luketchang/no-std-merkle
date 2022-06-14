@@ -1,4 +1,4 @@
-# Nomad Accumulator
+<!-- # Nomad Accumulator
 
 A set of accumulator-related tooling for Nomad development. This crate contains
 a full incremental sparse merkle tree, as well as a lightweight tree which
@@ -48,4 +48,4 @@ We also expose a WASM interface. Limitations:
 - WASM bindings do not yet support const generics
 - Instead we expose trees of depth 2, 4, 8, 16, and 32
   - e.g. `Tree16` is a depth 16 tree, and creates and verifies `Proof16`
-- WASM-bindings are not yet published on npm
+- WASM-bindings are not yet published on npm -->

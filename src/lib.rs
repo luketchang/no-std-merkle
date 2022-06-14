@@ -6,11 +6,7 @@
 
 extern crate thiserror_no_std as thiserror;
 
-#[macro_use]
 extern crate alloc;
-
-/// A full incremental merkle. Suitable for running off-chain.
-pub mod full;
 
 /// Hashing utils
 pub mod utils;
@@ -24,35 +20,19 @@ pub mod light;
 /// Merkle Proof struct
 pub mod proof;
 
-/// A full incremental merkle tree. Suitable for proving.
-pub mod tree;
-
-// #[cfg(target_arch = "wasm32")]
-// /// Wasm bindings for common operations
-// pub mod wasm;
-
-// #[cfg(target_arch = "wasm32")]
-// #[cfg_attr(target_arch = "wasm32", global_allocator)]
-// static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
-
 use primitive_types::{H256, U256};
 
 /// Tree depth
 pub const TREE_DEPTH: usize = 32;
-/// A Nomad protocol standard-depth tree
-pub type NomadTree = tree::Tree<TREE_DEPTH>;
 /// An incremental Nomad protocol standard-depth tree
 pub type NomadLightMerkle = light::LightMerkle<TREE_DEPTH>;
 /// A Nomad protocol standard-depth proof
 pub type NomadProof = proof::Proof<TREE_DEPTH>;
 
-const EMPTY_SLICE: &[H256] = &[];
 
 pub use error::*;
-use full::*;
 pub use light::*;
 pub use proof::*;
-pub use tree::*;
 
 pub use utils::*;
 
